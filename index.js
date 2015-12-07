@@ -12,23 +12,41 @@ server.listen(port, function () {
 // Routing
 app.use(express.static(__dirname + '/public'));
 
-// Chatroom
-
+// App
 var numUsers = 0;
 
 io.on('connection', function (socket) {
   var addedUser = false;
 
-  socket.on('power', function (data) {
-    console.log(data);
-    console.log(socket.username)
+  socket.on('power', function (data) { //true, false
     socket.broadcast.emit('power', {
       username: socket.username,
       message: data
     });
   });
 
+  socket.on('motion', function (data) { //true, false
+    socket.broadcast.emit('motion', {
+      username: socket.username,
+      message: data
+    });
+  });
 
+  socket.on('music', function (data) {
+    socket.broadcast.emit('music', {
+      username: socket.username,
+      message: data
+    });
+  });
+
+  socket.on('sound', function (data) {
+    socket.broadcast.emit('sound', {
+      username: socket.username,
+      message: data
+    });
+  });
+
+///////////////////////////////////////////////////////////////////////////////
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
     // we tell the client to execute 'new message'

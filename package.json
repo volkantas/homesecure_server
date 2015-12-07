@@ -1,0 +1,12 @@
+{
+  "name": "homesecure_server",
+  "version": "0.0.0",
+  "description": "Home secure socket.io server",
+  "main": "index.js",
+  "author": "Volkan Tas",
+  "private": true,
+  "license": "BSD",
+  "dependencies": {
+    "express": "3.4.8"
+  }
+}

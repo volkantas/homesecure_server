@@ -54,7 +54,7 @@ io.on('connection', function (socket) {
   });
 
   socket.on('soundStop', function (data) {
-    socket.broadcast.emit('soundEnd', {
+    socket.broadcast.emit('soundStop', {
       username: socket.username,
       message: data
     });

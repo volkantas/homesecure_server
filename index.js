@@ -46,6 +46,13 @@ io.on('connection', function (socket) {
     });
   });
 
+  socket.on('soundEnd', function (data) {
+    socket.broadcast.emit('soundEnd', {
+      username: socket.username,
+      message: data
+    });
+  });
+
 ///////////////////////////////////////////////////////////////////////////////
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {

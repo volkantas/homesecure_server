@@ -2,12 +2,15 @@
   "name": "homesecure_server",
   "version": "0.0.0",
   "description": "Home secure socket.io server",
+  "scripts": {
+    "start": "node index.js"
+  },
   "main": "index.js",
   "author": "Volkan Tas",
   "private": true,
   "license": "BSD",
   "dependencies": {
     "express": "3.4.8",
-    "parse": "^1.6.9"
+    "parse": "^1.7.0"
   }
 }

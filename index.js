@@ -110,7 +110,9 @@ function sendPush(text){
   Parse.Push.send({
       where:{},
       data: {
-          alert: text
+          alert: text,
+          badge: "Increment",
+          sound: "default"
       }
   }, {
       success: function (response) {

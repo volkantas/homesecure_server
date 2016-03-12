@@ -36,6 +36,11 @@ io.on('connection', function (socket) {
     });
   });
 
+  socket.on('motionPush', function (username) { //true, false
+    //SEND PUSH
+    sendPush('\uE11A ' username + " hareket algılandı!");
+  });
+
   socket.on('music', function (data) {
     socket.broadcast.emit('music', {
       username: socket.username,
@@ -73,7 +78,7 @@ io.on('connection', function (socket) {
     addedUser = true;
 
     //SEND PUSH
-    sendPush('\ue21a ' + username + " sisteme bağlandı");
+    sendPush('\u26AA ' + username + " sisteme bağlandı");
 
     socket.broadcast.emit('user joined', {
       username: socket.username,
@@ -82,12 +87,14 @@ io.on('connection', function (socket) {
   });
 
   // when the user disconnects.. perform this
-  socket.on('\ue219 ' + 'disconnect', function () {
+  socket.on('disconnect', function (username) {
     if (addedUser) {
       --numUsers;
 
       //SEND PUSH
-      sendPush(username + " bağlantısı kesildi");
+      if(username != "Phone"){
+        sendPush('\uE219 ' + username + " bağlantısı kesildi");
+      }
 
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
@@ -95,30 +102,6 @@ io.on('connection', function (socket) {
         numUsers: numUsers
       });
     }
-  });
-
-///////////////////////////////////////////////////////////////////////////////
-  // when the client emits 'new message', this listens and executes
-  socket.on('new message', function (data) {
-    // we tell the client to execute 'new message'
-    socket.broadcast.emit('new message', {
-      username: socket.username,
-      message: data
-    });
-  });
-
-  // when the client emits 'typing', we broadcast it to others
-  socket.on('typing', function () {
-    socket.broadcast.emit('typing', {
-      username: socket.username
-    });
-  });
-
-  // when the client emits 'stop typing', we broadcast it to others
-  socket.on('stop typing', function () {
-    socket.broadcast.emit('stop typing', {
-      username: socket.username
-    });
   });
 
 });

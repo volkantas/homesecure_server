@@ -36,9 +36,9 @@ io.on('connection', function (socket) {
     });
   });
 
-  socket.on('motionPush', function (username) { //true, false
+  socket.on('motionPush', function (username) { // Home, Phone
     //SEND PUSH
-    sendPush('\uE11A ' username + " hareket algılandı!");
+    sendPush('\uE11A ' + username + " hareket algılandı!");
   });
 
   socket.on('music', function (data) {
